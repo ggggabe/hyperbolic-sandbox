@@ -6,10 +6,10 @@ export const CrtShader =
   {
     uniforms: {
       "tDiffuse": 	{ type: "t", value: null },
-      "time": 		{ type: "f", value: 3.0 },
-      "distortion":   { type: "f", value: .3 },
+      "time": 		{ type: "f", value: 1.0 },
+      "distortion":   { type: "f", value: .8 },
       "distortion2":  { type: "f", value: .3 },
-      "speed":     	{ type: "f", value: 3 },
+      "speed":     	{ type: "f", value: 5 },
       "rollSpeed":    { type: "f", value: 2 },
     },
 
@@ -109,7 +109,7 @@ export const RGBShiftShader = {
 
 		"tDiffuse": { type: "t", value: null },
 		"amount":   { type: "f", value: 0.005 },
-		"angle":    { type: "f", value: 0.0 }
+		"angle":    { type: "f", value: 0.5 }
 
 	},
 
@@ -152,8 +152,8 @@ export const CopyShader = {
 
 	uniforms: {
 
-		"tDiffuse": { type: "t", value: null },
-		"opacity":  { type: "f", value: 1.0 }
+		"tDiffuse": { type: "t", value: .5 },
+		"opacity":  { type: "f", value: .6 }
 
 	},
 
