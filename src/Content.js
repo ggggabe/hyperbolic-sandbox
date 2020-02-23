@@ -11,11 +11,10 @@ export default function () {
   const [src, setSrc] = useState(config.placeholder)
 
   const [blurRadius, setBlurRadius] = useState(20)
-  const sharpen = () => setBlurRadius(blurRadius - 1)
 
   useEffect(() => {
     if (blurRadius <= 0 || src === config.placeholder) return
-    const animate = setInterval(sharpen, 30)
+    const animate = setInterval(setBlurRadius(blurRadius-1), 30)
 
     return () => clearInterval(animate)
   }, [blurRadius, src, config])

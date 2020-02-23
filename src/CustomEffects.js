@@ -1,7 +1,3 @@
-import ReactDOM from 'react-dom'
-import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
-import { shaderMaterial } from 'react-three-fiber'
-
 export const CrtShader =
   {
     uniforms: {

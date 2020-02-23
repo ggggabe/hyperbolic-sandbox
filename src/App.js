@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
+import React, { Suspense, useRef, useEffect,  useMemo } from 'react'
 import * as THREE from 'three'
 import Debug from 'debug'
 import { useThree, Canvas, useFrame, extend } from 'react-three-fiber'
@@ -7,9 +7,8 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from './postprocessing/UnrealBloomFix'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 
-import Logo, { Loading } from './Logo'
-import {CrtShader, RGBShiftShader, CopyShader} from './CustomEffects'
-import Sky from './Background'
+import  { Loading, Logo } from './Logo'
+import {CrtShader, RGBShiftShader} from './CustomEffects'
 
 const debug = Debug('rtf:main')
 
@@ -51,6 +50,7 @@ export default function () {
     <Canvas gl={{alpha: true}} camera={{ position:[0,0,4], fov: 100 }}>
       <pointLight position={[100, 100, 10]} />
       <Logo position={[0, 0, 0]} />
+
       <Suspense fallback={<Loading />}>
         <Effect />
       </Suspense>

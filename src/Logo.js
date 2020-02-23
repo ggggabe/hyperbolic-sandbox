@@ -1,12 +1,41 @@
-import React, { useRef, useState } from 'react'
-import * as THREE from 'three'
+import React, { useRef, useState, Suspense } from 'react'
+//import * as THREE from 'three'
 import Debug from 'debug'
-import { Dom, useFrame, useThree } from 'react-three-fiber'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
+import { useLoader, useFrame, useThree } from 'react-three-fiber'
+
+//import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
 const debug = Debug('rtf:logo')
 export function Loading() {
   return <code> loading </code>
+}
+
+function Asset ({url}) {
+  const gltf = useLoader(GLTFLoader, url)
+  const group = useRef()
+  debug({group})
+
+  useFrame(() => {
+    group.current.rotation.y += (.05 % (Math.PI/2))
+  })
+  return <group ref={group} position={[0,0,3.8]} >
+    <primitive object={gltf.scene} dispose={null} position={[0,0,0]} rotation={[Math.PI/2, 0, 0]} color={'#222'}/>
+  </group>
+}
+
+export function Logo (props) {
+  const { gl } = useThree()
+
+  debug({
+    pcl: gl.physicallyCorrectLights,
+    gl
+  })
+  //gl.physicallyCorrectLights = true
+
+  return <Suspense fallback={<Box {...props}/>}>
+    <Asset {...props} url={[process.env.PUBLIC_URL,'untitled.glb'].join('/')} />
+  </Suspense>
 }
 
 

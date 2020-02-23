@@ -1,7 +1,7 @@
-import React, {useRef, useMemo} from 'react'
+import React, {useRef} from 'react'
 import * as THREE from 'three'
 import Debug from 'debug'
-import { useThree, useFrame, extend } from 'react-three-fiber'
+import { useThree } from 'react-three-fiber'
 
 const debug = Debug('rtf:background')
 
@@ -13,9 +13,6 @@ export function Loading() {
 export default function (props) {
   // This reference will give us direct access to the mesh
   const mesh = useRef()
-
-  const { camera } = useThree()
-
   const background = new THREE.TextureLoader().load(process.env.PUBLIC_URL + '/sky.jpg')
 
   return (
