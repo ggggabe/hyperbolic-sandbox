@@ -13,19 +13,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: url('/sky.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
-#root {
+#webgl {
   display:block;
   height:calc(100vh - 10px);
   width: calc(100vw - 10px);
 }
+
+#container {
+  background-color:#222222;
+  display:flex;
+  height: 100vh;
+  width: 100vw;
+  position:absolute;
+  top:0;
+  left:0;
+
+}
+#container .react-blur {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.image-pro {
+  width:100%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
