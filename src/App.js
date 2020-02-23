@@ -15,16 +15,12 @@ const debug = Debug('rtf:main')
 
 extend({ ShaderPass, UnrealBloomPass, EffectComposer, RenderPass })
 
-function Effect ({nobloom
-}) {
-
+function Effect ({nobloom}) {
   const composer = useRef()
   const { scene, gl, size, camera } = useThree()
-  const aspect = useMemo(
-    () => new THREE.Vector2(size.width, size.height), [size]
-  )
-
+  const aspect = useMemo(() => new THREE.Vector2(size.width, size.height), [size])
   useEffect(() => void composer.current.setSize(size.width, size.height), [size])
+
   useFrame(({gl, scene}) => {
     return composer.current.render()
   }, 1)
@@ -38,10 +34,6 @@ function Effect ({nobloom
     <effectComposer ref={composer} args={[gl]}>
       <renderPass {...noclears} attachArray="passes" scene={scene} camera={camera}/>
       <unrealBloomPass {...noclears} attachArray="passes" args={[aspect, .8, .2, 0]} />
-      <shaderPass  {...noclears}
-        attachArray="passes"
-        args={[CopyShader]}
-      />
       <shaderPass {...noclears}
         attachArray="passes"
         args={[RGBShiftShader]}
@@ -49,7 +41,6 @@ function Effect ({nobloom
       <shaderPass {...noclears}
         attachArray="passes"
         args={[CrtShader]}
-        renderToScreen
       />
     </effectComposer>
   )
