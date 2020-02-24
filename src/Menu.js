@@ -83,9 +83,10 @@ function useHover() {
 
 const AnimatedLink = ({ href, name}) =>  {
   const [hoverRef, padding] = useHover();
+  const [color, setColor] = useState('#eee')
 
-  return <li ref={hoverRef}><a
-    style={padding}
+  return <li ref={hoverRef} onMouseOver={() => setColor('yellow')} onMouseOut={() => setColor('white')}><a
+    style={{...padding, color}}
     href={href}>{name}</a>
   </li>
 }
