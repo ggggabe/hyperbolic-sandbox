@@ -1,11 +1,11 @@
 import React, { useRef, useState, Suspense } from 'react'
 //import * as THREE from 'three'
 import Debug from 'debug'
-import { useLoader, useFrame, useThree } from 'react-three-fiber'
+import { useFrame, useThree } from 'react-three-fiber'
 import useModel from './useModel'
 
 //import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+//import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
 const debug = Debug('rtf:logo')
 export function Loading() {
@@ -15,10 +15,9 @@ export function Loading() {
 const material = { transparent: true, roughness: 0.8, fog: true, shininess: 0, flatShading: false }
 
 const VirginLogo = ({ color, ...props }) => {
-  const [geometries, center] = useModel([process.env.PUBLIC_URL,'untitled.glb'].join('/'))
+  const [geometries] = useModel([process.env.PUBLIC_URL,'untitled.glb'].join('/'))
   const [z, setZ] = useState(3.99)
   const [y, setY] = useState(-0.20)
-  const [x, setX] = useState(0)
   const group = useRef()
 
   useFrame(() => {
@@ -43,6 +42,7 @@ const VirginLogo = ({ color, ...props }) => {
   </group>
 }
 
+/*
 function Asset ({url}) {
   const gltf = useLoader(GLTFLoader, url)
   const group = useRef()
@@ -57,6 +57,7 @@ function Asset ({url}) {
     <primitive object={gltf.scene} dispose={null} position={[0,0,0]} rotation={[Math.PI/2, 0, 0]} color={'red'}/>
   </group>
 }
+*/
 
 export function Logo (props) {
   const { gl } = useThree()

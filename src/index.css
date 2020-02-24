@@ -42,25 +42,39 @@ a:link {
   justify-content: center;
   flex-flow: column;
   position: absolute;
+  overflow-y: auto;
   top:0;
   left:0;
 }
 
 #container #menu {
-  margin-top: 100px;
+  margin-top:40vh;
   color: #eee;
   font-family: 'Press Start 2P';
-  font-size: 24px;
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 20px;
 
   width: 300px;
 }
+#container #menu:hover {
+  cursor: pointer;
+}
 
-#container #menu li {
-  margin-bottom:20px
+#container #menu a {
+  padding: 14px 0;
+  width:100%;
+  text-align:center;
+  text-shadow: 4px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
 }
 
 
+#container #menu li {
+  display:flex;
+  justify-content: center;
+  margin-bottom:20px
+}
+
+#container #menu li:hover{
+}
 
 #background {
   display:flex;
