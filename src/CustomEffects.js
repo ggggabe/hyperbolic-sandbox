@@ -3,10 +3,10 @@ export const CrtShader =
     uniforms: {
       "tDiffuse": 	{ type: "t", value: null },
       "time": 		{ type: "f", value: 1.0 },
-      "distortion":   { type: "f", value: .8 },
+      "distortion":   { type: "f", value: .2 },
       "distortion2":  { type: "f", value: .3 },
       "speed":     	{ type: "f", value: 5 },
-      "rollSpeed":    { type: "f", value: 2 },
+      "rollSpeed":    { type: "f", value: 10 },
     },
 
     vertexShader: [
@@ -104,8 +104,8 @@ export const RGBShiftShader = {
 	uniforms: {
 
 		"tDiffuse": { type: "t", value: null },
-		"amount":   { type: "f", value: 0.005 },
-		"angle":    { type: "f", value: 0.5 }
+		"amount":   { type: "f", value: 0.05 },
+		"angle":    { type: "f", value: .125 }
 
 	},
 

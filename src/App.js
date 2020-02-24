@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect,  useMemo } from 'react'
+import React, { Suspense, useRef, useEffect,  useMemo, useState } from 'react'
 import * as THREE from 'three'
 import Debug from 'debug'
 import { useThree, Canvas, useFrame, extend } from 'react-three-fiber'
@@ -19,23 +19,29 @@ function Effect ({nobloom}) {
   const { scene, gl, size, camera } = useThree()
   const aspect = useMemo(() => new THREE.Vector2(size.width, size.height), [size])
   useEffect(() => void composer.current.setSize(size.width, size.height), [size])
+  const [rgb, setRgb] = useState(.01)
 
   useFrame(({gl, scene}) => {
+    if (rgb > .0025) {
+      setRgb(rgb - .00005)
+    }
+
     return composer.current.render()
   }, 1)
 
   const noclears = {
     clearAlpha: false
   }
-  debug({nobloom})
+  debug({camera})
 
   return (
     <effectComposer ref={composer} args={[gl]}>
       <renderPass {...noclears} attachArray="passes" scene={scene} camera={camera}/>
-      <unrealBloomPass {...noclears} attachArray="passes" args={[aspect, .8, .2, 0]} />
+      <unrealBloomPass {...noclears} attachArray="passes" args={[aspect, .8, .4, 0]} />
       <shaderPass {...noclears}
         attachArray="passes"
         args={[RGBShiftShader]}
+        material-uniforms-amount-value={rgb}
       />
       <shaderPass {...noclears}
         attachArray="passes"
@@ -47,8 +53,8 @@ function Effect ({nobloom}) {
 
 export default function () {
   return <div style={{width: '100%', height: '100%'}}>
-    <Canvas gl={{alpha: true}} camera={{ position:[0,0,4], fov: 100 }}>
-      <pointLight position={[100, 100, 10]} />
+    <Canvas gl={{alpha: true}} camera={{ position:[0,-.04,4], fov: 75 }}>
+      <pointLight position={[0, 0, 10]} />
       <Logo position={[0, 0, 0]} />
 
       <Suspense fallback={<Loading />}>
