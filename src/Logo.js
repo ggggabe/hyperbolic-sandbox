@@ -1,8 +1,12 @@
 import React, { useRef, useState, Suspense } from 'react'
+import ReactDOM from 'react-dom'
+
 //import * as THREE from 'three'
 import Debug from 'debug'
 import { useFrame, useThree } from 'react-three-fiber'
 import useModel from './useModel'
+
+import Menu from './Menu'
 
 //import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 //import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
@@ -20,17 +24,29 @@ const VirginLogo = ({ color, ...props }) => {
   const [y, setY] = useState(-0.20)
   const group = useRef()
 
+  let menu = false
+
+  let zDone = false
+  let yDone = false
   useFrame(() => {
     group.current.rotation.y = (group.current.rotation.y - .01) % (Math.PI*2)
     if (group.current.position.z > 3.7) {
       setZ(z - .001)
+    } else {
+      zDone = true
     }
 
     if (group.current.position.y < .09) {
       setY(y + .001)
       group.current.rotation.x += .001
+    } else {
+      yDone = true
     }
 
+    if (yDone && zDone && !menu) {
+      ReactDOM.render(<Menu />, document.getElementById('menu'))
+      menu = true
+    }
   })
 
   return <group ref={group} position={[0, y, z]}>

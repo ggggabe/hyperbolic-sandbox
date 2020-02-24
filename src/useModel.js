@@ -5,7 +5,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 const resource = createResource(file => new Promise(async res => new GLTFLoader().load(file, res)))
 
 export default function useModel(file) {
-  console.log({file})
   const { scene } = resource.read(file)
   const geom = useMemo(() => {
     const temp = []
